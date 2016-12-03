@@ -24,7 +24,7 @@
             android:name=".data.FavProvider"
             android:authorities="com.pritesh.popular_movies"
             android:enabled="true"
-            android:exported="false"></provider>
+            android:exported="false"/>
     </application>
 
 </manifest>

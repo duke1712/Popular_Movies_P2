@@ -73,13 +73,7 @@ public class menu extends Fragment {
         ArrayAdapter<CharSequence> arrayAdapter=ArrayAdapter.createFromResource(context,R.array.filter, android.R.layout.simple_spinner_item);
         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
-//        try {
-//  //          update("Popular");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -141,9 +135,11 @@ public class menu extends Fragment {
         super.onResume();
         try {
             update(sort);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
+        }
+        catch (JSONException e) {
             e.printStackTrace();
         }
     }

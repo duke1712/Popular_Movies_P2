@@ -2,8 +2,6 @@ package com.pritesh.popular_movies;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +57,7 @@ public class ImageAdapter extends BaseAdapter {
             ViewGroup.MarginLayoutParams marginLayoutParams=new ViewGroup.MarginLayoutParams(imageView.getLayoutParams());
          //   marginLayoutParams.setMargins(10,10,10,10);
             imageView.setLayoutParams(marginLayoutParams);
-            if(i==0) {
+            if(i==0&&MainActivity.mTwoPane) {
                 Bundle arguments = new Bundle();
                 arguments.putString("POSITION", String.valueOf(i));
                 arguments.putBoolean("FLAG", false);
@@ -68,7 +66,7 @@ public class ImageAdapter extends BaseAdapter {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                main fragment = new main();
+                Main fragment = new Main();
                 fragment.setArguments(arguments);
 
                 ((MainActivity) mContext).getSupportFragmentManager().beginTransaction()
@@ -90,7 +88,7 @@ public class ImageAdapter extends BaseAdapter {
                     arguments.putString("POSITION",String.valueOf(i));
                     arguments.putBoolean("FLAG",false);
                     arguments.putString("id",menu.results.getJSONObject(i).getString("id"));
-                    main fragment = new main();
+                    Main fragment = new Main();
                     fragment.setArguments(arguments);
 
                     ((MainActivity)mContext).getSupportFragmentManager().beginTransaction()

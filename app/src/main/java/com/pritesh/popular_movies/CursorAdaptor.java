@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
@@ -14,8 +13,6 @@ import android.widget.ImageView;
 
 import com.pritesh.popular_movies.data.FavContracts;
 import com.squareup.picasso.Picasso;
-
-import static java.lang.System.load;
 
 /**
  * Created by prittesh on 26/11/16.
@@ -74,7 +71,7 @@ Context context;
                    //   arguments.putString("POSITION",String.valueOf(i));
                    arguments.putBoolean("FLAG",true);
                    arguments.putString("id",String.valueOf(view.getTag()));
-                   main fragment = new main();
+                   Main fragment = new Main();
                    fragment.setArguments(arguments);
 
                    ((MainActivity)mContext).getSupportFragmentManager().beginTransaction()
