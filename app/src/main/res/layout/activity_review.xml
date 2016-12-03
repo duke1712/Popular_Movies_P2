@@ -21,7 +21,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:text="Review"
+        tools:text="Review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/author"
@@ -41,7 +41,6 @@
             android:layout_marginTop="14dp"
             android:id="@+id/reviewBox"
             android:layout_alignParentEnd="true"
-            tools:text="ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppcsaccascas"
             android:scrollbars="vertical"
             android:scrollIndicators="right"
             android:scrollbarAlwaysDrawVerticalTrack="true" />
