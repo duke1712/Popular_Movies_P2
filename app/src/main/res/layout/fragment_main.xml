@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<!--<ScrollView-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_width="match_parent"-->
+
+    <!--&gt;-->
+
+<LinearLayout android:id="@+id/activity_details_"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-
-    >
-
-    <LinearLayout
-        android:id="@+id/activity_details_"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="1">
+    android:background="?android:attr/windowBackground">
         <!--tools:context="com.pritesh.popular_movies.Details_Activity"-->
 
 
@@ -26,7 +27,7 @@
             android:textSize="24sp"
             android:textStyle="normal|bold"
             android:textAlignment="center"
-            android:background="@android:color/holo_blue_dark"
+            android:background="@color/colorPrimary"
             android:foregroundGravity="center"
             android:gravity="center"
             />
@@ -38,7 +39,7 @@
                 android:layout_width="200dp"
                 app:srcCompat="@android:color/background_light"
                 android:id="@+id/imageView"
-                android:layout_height="200dp"/>
+                android:layout_height="250dp"/>
             <LinearLayout
                 android:layout_width="0dp"
                 android:paddingLeft="20dp"
@@ -92,33 +93,30 @@
             android:background="@android:color/darker_gray"/>
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@android:color/darker_gray"
+            android:background="?android:attr/windowBackground"
             android:id="@+id/trailer"
-            />
+            style="@style/Base.Theme.AppCompat.Light.Dialog"
+            android:layout_height="match_parent"
+            android:theme="@style/AppTheme" />
 
-        <TextView
-            android:text="Reviews"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView"
-            android:textColor="#ffffff"
-            android:textStyle="normal|bold"
-            android:background="@android:color/darker_gray"
-            android:textSize="18sp" />
+        <!--<TextView-->
+            <!--android:text="Reviews"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/textView"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textStyle="normal|bold"-->
+            <!--android:background="@android:color/darker_gray"-->
+            <!--android:textSize="18sp"-->
+            <!--android:visibility="gone" />-->
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_marginTop="2dp"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
-
-        <ListView
-            android:layout_width="match_parent"
-            android:background="@android:color/darker_gray"
-            android:layout_height="200dp"
-            android:id="@+id/review"
-            android:layout_weight="1">
-        </ListView>
+        <!--<ListView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:background="@android:color/darker_gray"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:id="@+id/review"-->
+            <!--android:layout_weight="1"-->
+            <!--android:visibility="gone">-->
+        <!--</ListView>-->
     </LinearLayout>
-</ScrollView>
+<!--</ScrollView>-->

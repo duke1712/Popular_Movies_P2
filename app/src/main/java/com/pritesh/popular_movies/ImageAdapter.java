@@ -2,6 +2,9 @@ package com.pritesh.popular_movies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +25,13 @@ import java.util.ArrayList;
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     ArrayList<String> arrayList;
+    ArrayList<Integer> movieNo;
    // int a[]={R.drawable.cc,R.drawable.cc};
 
-    public ImageAdapter(ArrayList<String> arrayList,Context c) {
+    public ImageAdapter(ArrayList<String> arrayList,ArrayList<Integer> movieNo,Context c) {
         mContext=c;
         this.arrayList=arrayList;
+        this.movieNo=movieNo;
     }
 
     @Override
@@ -97,10 +102,10 @@ public class ImageAdapter extends BaseAdapter {
                 }
                 else {
                     Intent detaill_intent = new Intent(mContext, Details_Activity.class);
-                    detaill_intent.putExtra("POSITION", i);
+                    detaill_intent.putExtra("POSITION", movieNo.get(i));
                     detaill_intent.putExtra("FLAG", false);
 
-                        detaill_intent.putExtra("id", menu.results.getJSONObject(i).getString("id"));
+                        detaill_intent.putExtra("id", menu.results.getJSONObject(movieNo.get(i)).getString("id"));
 
                     mContext.startActivity(detaill_intent);
                 }
@@ -109,7 +114,11 @@ public class ImageAdapter extends BaseAdapter {
                 }
             }
         });
-        Picasso.with(mContext).load(arrayList.get(i)).fit().into(imageView);
+//        Drawable dr = mContext.getResources().getDrawable(R.drawable.loading_animation);
+//        Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
+//// Scale it to 50 x 50
+//        Drawable d = new BitmapDrawable(mContext.getResources(), Bitmap.createScaledBitmap(bitmap, 50, 50, true));
+        Picasso.with(mContext).load(arrayList.get(i)).placeholder(R.drawable.loading_animation).fit().into(imageView);
    //     imageView.setImageResource(ar);
         return imageView;
     }

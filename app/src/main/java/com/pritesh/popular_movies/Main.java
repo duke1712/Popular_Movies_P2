@@ -81,7 +81,8 @@ public class Main extends Fragment {
         // intent=getIntent();
         mProg = new ProgressDialog(context, ProgressDialog.STYLE_SPINNER);
         trailer = (ListView) view.findViewById(R.id.trailer);
-        review = (ListView) view.findViewById(R.id.review);
+       //
+        // review = (ListView) view.findViewById(R.id.review);
         movieName = (TextView) view.findViewById(R.id.movieName);
         date = (TextView) view.findViewById(R.id.releaseDate);
         synopsis = (TextView) view.findViewById(R.id.synopsis);
@@ -183,10 +184,7 @@ public class Main extends Fragment {
 
         return  view;
     }
-    public interface update
-    {
-        void up();
-    }
+
     void update_video(JSONArray results, final ArrayList<String> videoId)
     {
         String a[]=new String[videoId.size()];
@@ -255,39 +253,39 @@ public class Main extends Fragment {
         @Override
         protected void onPostExecute(Long aLong) {
 
-            try {
+            //try {
                 update_video(results,videoId);
-                update_review(reviewobj);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+               // update_review(reviewobj);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
             mProg.cancel();
         }
     }
 
-    private void update_review(final ArrayList<JSONObject> reviewobj) throws JSONException {
-        String a[]=new String[reviewobj.size()];
-        for(int i=0;i<a.length;i++)
-        {
-            a[i]=reviewobj.get(i).getString("author");
-        }
-        reviewAdapter=new ArrayAdapter<>(context.getApplicationContext(),android.R.layout.simple_list_item_1,a);
-        review.setAdapter(reviewAdapter);
-        review.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                try {
-                    Intent reviewIntent=new Intent(context.getApplicationContext(),Review.class);
-                    reviewIntent.putExtra("AUTHOR",reviewobj.get(i).getString("author"));
-                    reviewIntent.putExtra("CONTENT",reviewobj.get(i).getString("content"));
-                    startActivity(reviewIntent);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        });
-    }
+//    private void update_review(final ArrayList<JSONObject> reviewobj) throws JSONException {
+//        String a[]=new String[reviewobj.size()];
+//        for(int i=0;i<a.length;i++)
+//        {
+//            a[i]=reviewobj.get(i).getString("author");
+//        }
+//        reviewAdapter=new ArrayAdapter<>(context.getApplicationContext(),android.R.layout.simple_list_item_1,a);
+//        review.setAdapter(reviewAdapter);
+//        review.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                try {
+//                    Intent reviewIntent=new Intent(context.getApplicationContext(),Review.class);
+//                    reviewIntent.putExtra("AUTHOR",reviewobj.get(i).getString("author"));
+//                    reviewIntent.putExtra("CONTENT",reviewobj.get(i).getString("content"));
+//                    startActivity(reviewIntent);
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//
+//            }
+//        });
+//    }
 }

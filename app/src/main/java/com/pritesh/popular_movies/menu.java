@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,10 @@ public class menu extends Fragment {
     private Spinner spinner;
     private GridView movies;
     private ArrayList<String> arrayList=new ArrayList<>();
+    private ArrayList<String> moviewName=new ArrayList<>();
+    private ArrayList<Integer> movieNo=new ArrayList<>();
+
+    SearchView searchView;
     private String sort="Popular";
     ProgressDialog mProg;
     static CursorAdaptor cursorAdaptor;
@@ -68,6 +73,32 @@ public class menu extends Fragment {
         mProg=new ProgressDialog(context,ProgressDialog.STYLE_SPINNER);
         spinner=(Spinner)view.findViewById(R.id.spinner);
         movies=(GridView)view.findViewById(R.id.movies);
+        searchView=(SearchView)view.findViewById(R.id.searchView);
+        searchView.setQueryHint("Search Movie");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                ArrayList<String> newList=new ArrayList<String>();
+                ArrayList<Integer> newNo=new ArrayList<>();
+                for(int i=0;i<moviewName.size();i++)
+                {
+                    if(moviewName.get(i).toLowerCase().contains(newText.toLowerCase()))
+                    {
+                        newList.add(arrayList.get(i));
+                        newNo.add(i);
+                    }
+                }
+                image=new ImageAdapter(newList,newNo,context);
+                movies.setAdapter(image);
+
+                return false;
+            }
+        });
         //      mov.doInBackground(Constants.BASE_URL+Constants.POPULAR_URL+Constants.API_KEY);
 
         ArrayAdapter<CharSequence> arrayAdapter=ArrayAdapter.createFromResource(context,R.array.filter, android.R.layout.simple_spinner_item);
@@ -75,29 +106,10 @@ public class menu extends Fragment {
         spinner.setAdapter(arrayAdapter);
 
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                sort=adapterView.getAdapter().getItem(i).toString();
-                try {
-                    update(sort);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
 
 
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
-        image=new ImageAdapter(arrayList,context);
+        image=new ImageAdapter(arrayList,movieNo,context);
         movies.setAdapter(image);
 
 
@@ -133,15 +145,35 @@ public class menu extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        try {
-            update(sort);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
+       // try {
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    sort=adapterView.getAdapter().getItem(i).toString();
+                    try {
+                        update(sort);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+            //update(sort);
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        catch (JSONException e) {
+//            e.printStackTrace();
+        //}
     }
 
     String doGetRequest(String url) throws IOException {
@@ -161,8 +193,11 @@ public class menu extends Fragment {
                 int length = results.length();
                 for (int i = 0; i < length; i++) {
                     JSONObject movie = results.getJSONObject(i);
+                    String title=movie.getString("title");
                     String img_url = movie.getString("poster_path");
                     img_url = img_url.substring(1);
+                    moviewName.add(title);
+                    movieNo.add(i);
                     arrayList.add(Constants.IMAGE_BASE_URL + img_url +"?"+ Constants.API_KEY);
 
                 }
@@ -185,9 +220,19 @@ public class menu extends Fragment {
         @Override
         protected void onPostExecute(Long aLong) {
             mProg.cancel();
-            movies.setAdapter(image);
-            image.notifyDataSetChanged();
-
+//            if(moviewName.size()!=arrayList.size()) {
+//                try {
+//                    update(spinner.getSelectedItem().toString());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+           // else {
+                movies.setAdapter(image);
+                image.notifyDataSetChanged();
+           // }
         }
     }
 
